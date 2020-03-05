@@ -1,0 +1,86 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Group Project</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a id="login-link" class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+          <a id="register-link" class="nav-link" href="#">Register</a>
+        </li>
+        <li class="nav-item" style="display: none;">
+          <a id="todos-link" class="nav-link" href="#">BTC</a>
+        </li>
+        <li class="nav-item" style="display: none;">
+          <a id="logout-link" class="nav-link" href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div id="register-page" class="pt-3" style="display:none;">
+      <h1>Register</h1>
+      <form>
+        <label>Name:</label><br>
+        <input type="text" name="name" value=""><br>
+        <label>Username:</label><br>
+        <input type="text" name="username" value=""><br>
+        <label>Email:</label><br>
+        <input type="text" name="email" value=""><br>
+        <label>Password:</label><br>
+        <input type="password" name="password" value=""><br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <div id="login-page" class="pt-3" style="display:none;">
+      <h1>Login</h1>
+      <form>
+        <label>Email:</label><br>
+        <input id="login-email" type="text" name="email" value=""><br>
+        <label>Password:</label><br>
+        <input id="login-password" type="password" name="description" value=""><br><br>
+        <input id="login-submit" type="button" value="Submit">
+      </form>
+    </div>
+
+    <div id="BTC-page" class="pt-3" style="display:none;">
+      <h1>BTC</h1>
+      <label>Buy:</label><br>
+      <input id="BTC-amount" type="text" name="buy" value=""><br><br>
+      <input id="BTC-buy" type="button" value="buy">
+      <label>Sell:</label><br>
+      <input id="rupiah-amount" type="text" name="sell" value=""><br><br>
+      <input id="BTC-sell" type="button" value="sell">
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="js/dataView.js"></script>
+  <script src="js/page.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/btc.js"></script>
+</body>
+
+</html>
