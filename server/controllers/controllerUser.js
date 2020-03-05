@@ -1,7 +1,7 @@
 'use strict'
 
-const { User, Company, Stock } = require('../models')
-const axios = require('axios')
+const { User, Company, Stock, Sequelize } = require('../models')
+const Op = Sequelize.Op
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { OAuth2Client } = require('google-auth-library');
@@ -9,15 +9,18 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 const generatePass = require('../helpers/generateRandomPass')
 
 class ControllerUser {
-    static register(req,res,next){
-        const {name,username,email,password}=req.body
-        User.create({name,username,email,password})
-        .then(data=>{
-            res.status(201).json(data)
-        })
-        .catch(err=>{
-            next(err)
-        })
+    static register(req, res, next) {
+        const { name, username, email, password } = req.body
+        User.create({ name, username, email, password })
+            .then(data => {
+                const token = jwt.sign({ id: data.id, email: data.email }, process.env.JWT_SECRET)
+                res.status(200).json({ token })
+            })
+            .catch(err => {
+                console.log(err)
+                res.send(err)
+                // next(err)
+            })
     }
 
     static google_login(req, res, next) {
@@ -51,42 +54,49 @@ class ControllerUser {
     }
 
     static login(req, res, next) {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
         User
             .findOne({
                 where: {
-                    email: email,
+                    [Op.or]: [{ email: username }, { username: username }]
                 }
             })
             .then(data => {
                 const test = bcrypt.compareSync(req.body.password, data.password)
                 if (test) {
-                    const token = jwt.sign({ id: data.id, email: data.email }, process.env.JWT_SECRET)
+                    const token = jwt.sign({ id: data.id, username: data.username }, process.env.JWT_SECRET)
                     res.status(200).json(token)
+                } else {
+                    throw {
+                        status: 404,
+                        msg: 'Not Found'
+                    }
                 }
             })
             .catch(err => {
                 console.log(err)
+                // res.send(err)
                 next(err)
             })
     }
 
-    static buy(req,res,next){
-        let id = Number(req.params.id)
-        Stock
-    }
+    // static buy(req,res,next){
+    //     let id = Number(req.params.id)
+    //     Stock
+    // }
 
-    static sell(req, res, next) {
-        let id = Number(req.params.id)
-        Stock
-            .destroy({ where: { id: id } })
-            .then(data => {
-                res.status(200).json(data)
-            })
-            .catch(err => {
-                next(err)
-            })
-    }
+    // static sell(req, res) {
+    //     let id = Number(req.params.id)
+    //     Stock
+    //         .destroy({ where: { id: id } })
+    //         .then(data => {
+    //             res.status(200).json(data)
+    //         })
+    //         .catch(err => {
+    //             res.send(err)
+    //             // next(err)
+    //         })
+    // }
 }
 
 module.exports = ControllerUser
