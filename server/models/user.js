@@ -1,4 +1,7 @@
 'use strict';
+
+const bcrypt = require('bcrypt')
+
 module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
@@ -29,32 +32,30 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
         notEmpty: {
           msg: `email can't be empty`
-        },
-        unique: {
-          args: true,
-          msg: 'Email address already in use!'
-        },
+        }
       }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-      notEmpty: {
+        notEmpty: {
           msg: `password can't be empty`
         }
       }
     },
     balance: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: `name can't be empty`
-        }
-      }
     },
-  }, { sequelize });
+  }, {
+    hooks: {
+      beforeCreate: (instance, option) => {
+        let salt = bcrypt.genSaltSync(10);
+        let hash = bcrypt.hashSync(instance.password, salt);
+        instance.password = hash
+      }
+    }, sequelize
+  });
   User.associate = function (models) {
     // associations can be defined here
   };

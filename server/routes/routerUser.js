@@ -3,9 +3,8 @@
 const router = require('express').Router()
 const Controller = require('../controllers/controllerUser')
 
-router.get('/users', Controller)
-router.post('/users', Controller)
-router.get('/users', Controller)
-router.get('/users', Controller)
+router.post('/register', Controller.register)
+router.post('/login', Controller.login)
+router.get('/google_login', Controller.google_login)
 
-module.export = router
+module.exports = router
