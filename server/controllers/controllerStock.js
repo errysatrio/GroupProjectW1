@@ -30,7 +30,7 @@ class StockController {
                                     name: result.data.profile.companyName,
                                     symbol: result.data.symbol,
                                     price: price,
-                                    changes: result.data.profile.changes
+                                    changes: result.data.profile.changesPercentage
                                 })
                                 .then(result2 =>{
                                     return Company.findAll()
@@ -64,7 +64,7 @@ class StockController {
                                 name: result.data.profile.companyName,
                                 symbol: result.data.symbol,
                                 price: price,
-                                changes: result.data.profile.changes
+                                changes: result.data.profile.changesPercentage
                             })
                         })
                         .catch(err => {

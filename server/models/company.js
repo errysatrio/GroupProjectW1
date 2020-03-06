@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     symbol: DataTypes.STRING,
     price: DataTypes.FLOAT,
-    changes: DataTypes.FLOAT
+    changes: DataTypes.STRING
   }, {sequelize})
 
   Company.associate = function(models) {
