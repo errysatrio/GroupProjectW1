@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel = "stylesheet" type="text/css" href="style.css">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel = "stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
 
+<body>
     <div id="login-page">
         <div id="login-form">
             <form action="POST">
                 <div>
                     <label for="username">Username or Email</label>
                     <input type="text" name="username" id="username-login">
+                </div>
+                <div>
+                    <label for="password">Password</label>
                     <input type="password" name="password" id="password-login">
+                </div>
+                <div>
                     <button type="submit">Sign In</button>
                 </div>
             </form>
@@ -25,53 +30,88 @@
     <div id="stocks">
         <h2>List of Stocks</h2>
     </div>
+    
+    <div id="register-page">
+        <div id="register-form">
+            <form action="POST">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name-register">
+                </div>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username-register">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email-register">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password-register">
+                </div>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <div id="add-page">
+        <div id="add-form">
+            <form action="POST">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name-add">
+                </div>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username-add">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email-add">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password-add">
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="edit-page">
+        <div id="edit-form">
+            <form action="POST">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name-edit">
+                </div>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username-edit">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email-edit">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password-edit">
+                </div>
+                <div>
+                    <button type="submit">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src= "https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-        getStocks()
-        // =========================== function ===============================
-        function getStocks(){
-            $.ajax({
-                url: "http://localhost:3000/stocks",
-                method: "get",
-                success: function(data){
-                    let dataShow = []
-                    for(let i = 0; i < data.length; i++){
-                        if(data[i].changes[1] === '+'){
-                            dataShow.push(data[i])
-                        }
-                    }
-                    for(let i = 0; i < data.length; i++){
-                        if(data[i].changes[1] === '0'){
-                            dataShow.push(data[i])
-                        }
-                    }
-                    for(let i = 0; i < data.length; i++){
-                        if(data[i].changes[1] === '-'){
-                            dataShow.push(data[i])
-                        }
-                    }
-                    dataShow.forEach((element) => {
-                        $("#stocks").append(`<div class="container">
-                            <div class="content" style="width: 50%">
-                                <h3>${element.name}</h3>
-                                <div class="symbol">
-                                    <span>${element.symbol}</span><br>
-                                </div>
-                                <div class="price">
-                                    <span>Rp${element.price}</span><br>
-                                </div>
-                                <span style="color: ${element.changes[1] === '+' ? 'green' : element.changes[1] === '-' ? 'red' : 'black'} ">${element.changes}</span><br>
-                            </div>
-                            <div class="action" style="width: 50%">
-                                <button>Buy</button>
-                            <div>
-                        </div>`)
-                    })
-                }
-            })
-        }
-    </script>
+    <script src= "script/google.js"></script>
+    <script src= "script/script.js"></script>
+    
 </body>
 
 </html>
