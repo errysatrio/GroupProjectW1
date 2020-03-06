@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require('bcrypt')
+const { Bcrypt } = require("../helpers");
 
 module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize
@@ -45,16 +45,16 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     balance: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-  }, {
-    hooks: {
-      beforeCreate: (instance, option) => {
-        let salt = bcrypt.genSaltSync(10);
-        let hash = bcrypt.hashSync(instance.password, salt);
-        instance.password = hash
-      }
-    }, sequelize
+    balanceBtc: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    }
+  }, { sequelize });
+  User.addHook("beforeCreate", (user) => {
+    user.password = Bcrypt.hash(user.password);
   });
   User.associate = function (models) {
     // associations can be defined here
