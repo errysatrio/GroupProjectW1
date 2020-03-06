@@ -13,7 +13,7 @@ class StockController {
             return axios(options)
         })
         .then(data1 => {
-            let number = 15
+            let number = 17
             for(let i = 0; i < number; i++){
                 if (i === number-1){
                     setTimeout(()=>{
