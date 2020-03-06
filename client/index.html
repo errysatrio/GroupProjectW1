@@ -53,6 +53,7 @@
                     }
                     dataShow.forEach((element) => {
                         $("#stocks").append(`<div class="container">
+                            <div class="content" style="width: 50%">
                                 <h3>${element.name}</h3>
                                 <div class="symbol">
                                     <span>${element.symbol}</span><br>
@@ -61,8 +62,11 @@
                                     <span>Rp${element.price}</span><br>
                                 </div>
                                 <span style="color: ${element.changes[1] === '+' ? 'green' : element.changes[1] === '-' ? 'red' : 'black'} ">${element.changes}</span><br>
+                            </div>
+                            <div class="action" style="width: 50%">
                                 <button>Buy</button>
-                            </div>`)
+                            <div>
+                        </div>`)
                     })
                 }
             })

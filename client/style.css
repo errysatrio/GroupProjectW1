@@ -14,11 +14,11 @@ body{
     margin: 0; font-family: gotham-narrow; text-align: center;
 }
 .container{
-    width: 60%; height: auto; border: 4px solid black; border-radius: 20px; margin: 20px auto; text-align: left; padding: 20px 20px;
-    /* display: flex; flex-direction: row;  */
+    width: 60%; height: auto; border: 4px solid black; border-radius: 20px; margin: 50px auto; text-align: left; padding: 20px 20px;
+    display: flex; flex-direction: row; 
 }
 .container h3{
-    font-size: 25px; margin-top: 0; margin-bottom: 2px; width: 300px;
+    font-size: 25px; margin-top: 0; margin-bottom: 2px; width: ;
 }
 .container p{
     font-size: 17px; margin-top: 0; color: grey; margin-bottom: 20px;
@@ -33,5 +33,5 @@ body{
     margin: 10px 1px; font-size: 20px;
 }
 .container button{
-    margin: 10px 1px; float: right;
+    margin: 10px 10px; float: right; width: 90px; height: 30px; background-color: yellow; color: black; border-radius: 10px;
 }
