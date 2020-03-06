@@ -43,8 +43,7 @@ function getStocks() {
 }
 
 function register(){
-    // alert('busuk')
-    console.log($('#name-register').val(),
+    $('#name-register').val(),
     $('#username-register').val(),
     $('#email-register').val(),
     $('#password-register').val(),)

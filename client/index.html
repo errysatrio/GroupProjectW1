@@ -4,8 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <meta name="google-signin-client_id"
+        content="764486185935-aobe28kkks4b421rio9i94pmf79eh9c2.apps.googleusercontent.com">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Document</title>
 </head>
 
 <body>
@@ -22,6 +24,7 @@
                 </div>
                 <div>
                     <button type="submit" onclick="login()">Sign In</button>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </div>
             </form>
         </div>
@@ -50,7 +53,7 @@
                     <input type="password" name="password" id="password-register">
                 </div>
                 <div>
-                    <button type="submit" >Register</button>
+                    <button type="submit">Register</button>
                 </div>
             </form>
         </div>
@@ -91,7 +94,14 @@
             </form>
         </div>
     </div>
-    <script src= "https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script src= "script/google.js"></script>
     <script src= "script/onCondition.js"></script>
     <script src="script/functionScript.js"></script>
