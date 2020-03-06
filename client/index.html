@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-signin-client_id"
+        content="764486185935-aobe28kkks4b421rio9i94pmf79eh9c2.apps.googleusercontent.com">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Document</title>
+</head>
+
+<body>
+    <div class = "header">
+        <div class = "navbar">
+            <ul>
+                <li id = "btn-sign-in">Sign in</li>
+                <li id = "btn-register">Register</li>
+            </ul>
+        </div>
+        <div class="logout" style="display: none;">
+            <ul>
+                <li id="btn-your-stocks">Your Stock</li>
+                <li id="btn-logout">Logout</li>
+            </ul>
+        </div>
+    </div>
+    <div id="login-page">
+        <div >
+            <h3 style="font-size: 30px;">Sign in</h3>
+            <form id="login-form">
+                <input type="text" name="username" id="username-login" placeholder="Username or Email">
+                <input type="password" name="password" id="password-login" placeholder="Password">
+                <div style="display: flex; justify-content: center;">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </div>
+                <button type="submit" onclick="login()">Sign In</button>
+            </form>
+        </div>
+    </div>
+    <div id="register-page" style="display: none;">
+        <h3 style="font-size: 30px;">Register</h3>
+        <div>
+            <form id="register-form">
+                <div>
+                    <input type="text" name="name" id="name-register" placeholder="Name">
+                </div>
+                <div>          
+                    <input type="text" name="username" id="username-register" placeholder="Username">
+                </div>
+                <div>
+                    <input type="text" name="email" id="email-register" placeholder="Email">
+                </div>
+                <div>         
+                    <input type="password" name="password" id="password-register" placeholder="Password">
+                </div>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="userStocks" style="display: none;">
+        <h2 style="font-size: 30px;">Your Stocks</h2>
+    </div>
+    <div id="stocks" style="display: none;">
+        <h2 style="font-size: 30px;">List of Stocks</h2>
+    </div>
+    
+    <div id="edit-page" style="display: none;">
+        <div id="edit-form">
+            <form>
+                <div>
+                    <input type="hidden" name="rahasia" id="rahasia">
+                </div>
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name-edit">
+                </div>
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username-edit">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email-edit">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password-edit">
+                </div>
+                <div>
+                    <button type="submit" onclick="getOne()">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src= "script/google.js"></script>
+    <script src= "script/onCondition.js"></script>
+    <script src="script/functionScript.js"></script>
+    <script>
+        if(localStorage.token){
+            $("#login-page").hide(200)
+            $("#register-page").hide(200)
+            getStocks()
+            $("#stocks").show(450)
+            $(".navbar").hide()
+            $(".logout").show()
+        }
+    </script>
+    
+</body>
+
+</html>
