@@ -5,14 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel = "stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 
 <body>
     <div id="login-page">
         <div id="login-form">
-            <form action="POST">
+            <form>
                 <div>
                     <label for="username">Username or Email</label>
                     <input type="text" name="username" id="username-login">
@@ -22,7 +21,7 @@
                     <input type="password" name="password" id="password-login">
                 </div>
                 <div>
-                    <button type="submit">Sign In</button>
+                    <button type="submit" onclick="login()">Sign In</button>
                 </div>
             </form>
         </div>
@@ -32,8 +31,8 @@
     </div>
     
     <div id="register-page">
-        <div id="register-form">
-            <form action="POST">
+        <div>
+            <form id="register-form">
                 <div>
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name-register">
@@ -51,41 +50,25 @@
                     <input type="password" name="password" id="password-register">
                 </div>
                 <div>
-                    <button type="submit">Register</button>
+                    <button type="submit" >Register</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="add-page">
-        <div id="add-form">
-            <form action="POST">
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name-add">
-                </div>
-                <div>
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username-add">
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email-add">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password-add">
-                </div>
-                <div>
-                    <button type="submit">Add</button>
-                </div>
-            </form>
+    <div id="buy-page">
+        <div id="buy-form">
+
+
         </div>
     </div>
     
     <div id="edit-page">
         <div id="edit-form">
-            <form action="POST">
+            <form>
+                <div>
+                    <input type="hidden" name="rahasia" id="rahasia">
+                </div>
                 <div>
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name-edit">
@@ -103,14 +86,15 @@
                     <input type="password" name="password" id="password-edit">
                 </div>
                 <div>
-                    <button type="submit">Edit</button>
+                    <button type="submit" onclick="getOne()">Edit</button>
                 </div>
             </form>
         </div>
     </div>
     <script src= "https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src= "script/google.js"></script>
-    <script src= "script/script.js"></script>
+    <script src= "script/onCondition.js"></script>
+    <script src="script/functionScript.js"></script>
     
 </body>
 

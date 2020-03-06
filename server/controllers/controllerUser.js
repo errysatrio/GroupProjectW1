@@ -1,6 +1,6 @@
 'use strict'
 
-const { User, Company, Stock, Sequelize } = require('../models')
+const { User, Company, User_Stock, Sequelize } = require('../models')
 const Op = Sequelize.Op
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -17,9 +17,9 @@ class ControllerUser {
                 res.status(200).json({ token })
             })
             .catch(err => {
-                console.log(err)
-                res.send(err)
-                // next(err)
+                // console.log(err)
+                // res.send(err)
+                next(err)
             })
     }
 
@@ -49,7 +49,8 @@ class ControllerUser {
                 res.status(200).json({ token })
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
+                next(err)
             })
     }
 
@@ -74,16 +75,81 @@ class ControllerUser {
                 }
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
+                next(err)
+            })
+    }
+
+    static editDataUser(req, res) {
+        let id = Number(req.params.id)
+        let obj = {
+            nama: req.body.name,
+            user_name: req.body.user_name,
+            password: req.body.password,
+            email: req.body.email
+        }
+        User
+            .update(obj, {
+                where: {
+                    id: id
+                }
+            })
+            .then(data => {
+                res.redirect(`/user/${id}`)
+            })
+            .catch(err => {
                 // res.send(err)
                 next(err)
             })
     }
 
-    // static buy(req,res,next){
-    //     let id = Number(req.params.id)
-    //     Stock
-    // }
+
+    static buy(req, res, next) {
+        let id = Number(req.body.id)
+        let obj = {
+            StockId: id,
+            UserId: req.user.id,
+            amount: Number(req.body.amount)
+        }
+        // console.log(obj)
+        User_Stock
+            .create(obj)
+            .then(data => {
+                res.status(201).json(data)
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+    static showPorto(req, res, next) {
+        let UserId = Number(req.user.id)
+        User_Stock.findAll({ where: { UserId } })
+            .then(data => {
+                if (data) {
+                    res.status(200).json(data)
+                } else {
+                    throw {
+                        status: 404,
+                        msg: 'Not Found'
+                    }
+                }
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+
+    static getOne(req, res, next) {
+        let id = req.user.id;
+        console.log('masuk getone')
+        User.findOne({ where: { id } })
+            .then(user => {
+                res.status(200).json(user);
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
 
     // static sell(req, res) {
     //     let id = Number(req.params.id)

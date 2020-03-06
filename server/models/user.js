@@ -46,11 +46,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     balance: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     balanceBtc: {
       type: DataTypes.DECIMAL,
-      allowNull: false
     }
   }, { sequelize });
   User.addHook("beforeCreate", (user) => {
@@ -58,6 +56,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function (models) {
     // associations can be defined here
+    // User.belongsToMany(models.Company, {through:models.User_Stock})
+    User.hasMany(models.User_Stock, {foreignKey: 'UserId'})
   };
   return User;
 };

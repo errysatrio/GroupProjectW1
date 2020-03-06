@@ -1,12 +1,14 @@
 const { Jwt } = require("../helpers");
-const models = require('../models');
-const User = models.User;
+const {User} = require('../models');
+// const User = models.User;
 
 module.exports = (req, res, next) => {
+    // console.log('masuk authentication')
     let decodedToken;
     try {
-        const token = req.headers.authorization;
-        decodedToken = Jwt.verify(token);
+        const token = req.headers.token;
+        decodedToken = Jwt.verify(token, process.env.JWT_SECRET);
+        // console.log(decodedToken)
     } catch {
         next ({
             status: 401,

@@ -1,6 +1,6 @@
 const { Company } = require('../models')
 const axios = require('axios')
-const makePriceToIDR = require('../helper/makePriceToIDR')
+const makePriceToIDR = require('../helpers/makePriceToIDR')
 
 class StockController {
     static getStocks(req, res, next){
@@ -42,11 +42,19 @@ class StockController {
                                     res.status(200).json(companies)
                                 })
                                 .catch(err => {
-                                    console.log(err)
+                                    // console.log(err)
+                                    throw {
+                                        status: 404,
+                                        msg: 'Not Found'
+                                    }
                                 })
                             })
                             .catch(err => {
-                                console.log(err)
+                                // console.log(err)
+                                throw {
+                                    status: 404,
+                                    msg: 'Not Found'
+                                }
                             })
                         })
                     }, 500)
@@ -68,7 +76,11 @@ class StockController {
                             })
                         })
                         .catch(err => {
-                            console.log(err)
+                            // console.log(err)
+                            throw {
+                                status: 404,
+                                msg: 'Not Found'
+                            }
                         })
                     })
                 }

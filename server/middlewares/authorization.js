@@ -1,14 +1,15 @@
 const bcrypt = require('bcrypt')
-const { Todo } = require('../models')
+const { User } = require('../models')
 
 function authorization(req, res, next) {
-    Todo
-        .findOne({ where: { id: Number(req.params.id) } })
+    console.log(req.user.id,'============')
+    User
+        .findOne({ where: { id: Number(req.user.id) } })
         .then(data => {
+            console.log(data,'============')
             if(data){
-                if (req.user.id === data.UserId) {
+                if (req.user.id === data.id) {
                     // console.log('masuk', req.user.id)
-                    console.log(data.UserId,'============')
                     next()
                 } else {
                     throw {
