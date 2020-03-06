@@ -43,10 +43,6 @@ function getStocks() {
 }
 
 function register(){
-    $('#name-register').val(),
-    $('#username-register').val(),
-    $('#email-register').val(),
-    $('#password-register').val(),)
     event.preventDefault()
     $.ajax({
         url:'http://localhost:4000/users/register',
