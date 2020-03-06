@@ -46,9 +46,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     balance: {
       type: DataTypes.INTEGER,
-    },
-    balanceBtc: {
-      type: DataTypes.DECIMAL,
     }
   }, { sequelize });
   User.addHook("beforeCreate", (user) => {

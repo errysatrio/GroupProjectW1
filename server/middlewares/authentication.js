@@ -3,12 +3,13 @@ const {User} = require('../models');
 // const User = models.User;
 
 module.exports = (req, res, next) => {
-    // console.log('masuk authentication')
+    console.log('masuk authentication')
     let decodedToken;
     try {
+        console.log(req.headers.token)
         const token = req.headers.token;
         decodedToken = Jwt.verify(token, process.env.JWT_SECRET);
-        // console.log(decodedToken)
+        console.log(decodedToken)
     } catch {
         next ({
             status: 401,

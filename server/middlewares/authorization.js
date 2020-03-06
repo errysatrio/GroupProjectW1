@@ -6,7 +6,7 @@ function authorization(req, res, next) {
     User
         .findOne({ where: { id: Number(req.user.id) } })
         .then(data => {
-            console.log(data,'============')
+            // console.log(data,'============')
             if(data){
                 if (req.user.id === data.id) {
                     // console.log('masuk', req.user.id)

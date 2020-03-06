@@ -37,9 +37,10 @@ class ControllerUser {
             })
             .then(data => {
                 const { email, name } = payload
+                let username = 'qwqweasdj'
                 let password = generatePass()
                 if (!data) {
-                    return User.create({ email, name, password })
+                    return User.create({ email, name,username, password })
                 } else {
                     return data
                 }
@@ -123,9 +124,10 @@ class ControllerUser {
     }
     static showPorto(req, res, next) {
         let UserId = Number(req.user.id)
-        User_Stock.findAll({ where: { UserId } })
+        User_Stock.findAll({ where: { UserId }, include: Company })
             .then(data => {
                 if (data) {
+                    console.log(data);
                     res.status(200).json(data)
                 } else {
                     throw {
@@ -151,18 +153,18 @@ class ControllerUser {
             })
     }
 
-    // static sell(req, res) {
-    //     let id = Number(req.params.id)
-    //     Stock
-    //         .destroy({ where: { id: id } })
-    //         .then(data => {
-    //             res.status(200).json(data)
-    //         })
-    //         .catch(err => {
-    //             res.send(err)
-    //             // next(err)
-    //         })
-    // }
+    static sell(req, res) {
+        let id = Number(req.params.id)
+        User_Stock
+            .destroy({ where: { id: id } })
+            .then(data => {
+                res.status(200).json(data)
+            })
+            .catch(err => {
+                // res.send(err)
+                next(err)
+            })
+    }
 }
 
 module.exports = ControllerUser

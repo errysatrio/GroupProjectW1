@@ -1,11 +1,15 @@
+const axios = require('axios');
+
 function generatePass(){
-    let char='abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-    let pass = ''
-    for(let i=0;i<10;i++){
-        let random = Math.floor(Math.random()*62)
-        pass += char[random]
-    }
-    return pass
+    axios({
+        url: 'https://passwordwolf.com/api',
+        method: 'get'
+    })
+    .then(data => {
+        return data.data[0].password
+    }).catch(err => {
+        console.log(err)
+    })
 }
 
 module.exports = generatePass

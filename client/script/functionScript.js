@@ -4,7 +4,9 @@ function getStocks() {
     $.ajax({
         url: "http://localhost:4000/stocks",
         method: "get",
+        headers: {token: localStorage.token},
         success: function (data) {
+            console.log(data)
             let dataShow = []
             for (let i = 0; i < data.length; i++) {
                 if (data[i].changes[1] === '+') {
@@ -31,10 +33,10 @@ function getStocks() {
                                 <div class="price">
                                     <span>Rp${element.price}</span><br>
                                 </div>
-                                <span style="color: ${element.changes[1] === '+' ? 'green' : element.changes[1] === '-' ? 'red' : 'black'} ">${element.changes}</span><br>
+                                <span style="color: ${element.changes[1] === '+' ? 'lightgreen' : element.changes[1] === '-' ? 'pink' : 'black'} ">${element.changes}</span><br>
                             </div>
                             <div class="action" style="width: 50%">
-                                <button>Buy</button>
+                                <button onclick="buy(${element.id}, 1)">Buy</button>
                             <div>
                         </div>`)
             })
@@ -55,14 +57,13 @@ function register(){
         },
         success:(data)=>{
             console.log('sukses menambah data', data)
-            localStorage.setItem('token',token)
+            localStorage.setItem('token', data.token)
         },
         error:(err)=> console.log(err)
     })
 }
 
-function login(){
-    event.preventDefault();
+function login(){;
     $.ajax({
         url: 'http://localhost:4000/users/login',
         method: 'post',
@@ -71,10 +72,14 @@ function login(){
             'password': $('#password-login').val()
         },
         success: (data) => {
+            console.log(data)
             localStorage.setItem('token', data)
-            getData()
-            // $("#main-page").show()
-            // $('#login-page').hide()
+            $("#login-page").hide(200)
+            $("#register-page").hide(200)
+            getStocks()
+            $("#stocks").show(450)
+            $(".navbar").hide()
+            $(".logout").show()
         },
         error:(err)=>{
             console.log(err)
@@ -121,7 +126,57 @@ function update(){
     })
 }
 
-function buy(){}
+function buy(id, amount){
+    console.log('masuk buy')
+    $.ajax({
+        url: 'http://localhost:4000/users/stocks',
+        method: 'post',
+        headers: {'token': localStorage.token},
+        data: {
+            id, amount
+        },
+        success: function(){
+            getUserStocks()
+        }
+    })
+}
+
+function getUserStocks(){
+    $("#userStocks .container").remove()
+    $.ajax({
+        url: "http://localhost:4000/users/stocks",
+        method: "get",
+        headers: {token: localStorage.token},
+        success: function(data){
+            console.log(data)
+            data.forEach((element) =>{
+                $("#userStocks").append(`
+            <div class="container">
+                <div class="content" style="width: 50%">
+                    <h3>${element.Company.name}</h3>
+                    <div class="amount">
+                        <span>${element.amount}</span><br>
+                    </div>
+                </div>
+                <div class="action">
+                    <button onclick="deleteUserStock(${element.id})" style="float:right; background-color: red; color:red">Delete</button>
+                </div>
+            </div>`)
+            })
+            $("#userStocks").show(300)
+        }
+    })
+}
+function deleteUserStock(id){
+    $.ajax({
+        method:'delete',
+        url: `http://localhost:4000/users/stocks/${id}`,
+        headers: {token: localStorage.token},
+        success: (data)=>{
+            getUserStocks()
+        }
+    })
+}
 
 function showRegister(){
     $('#add-page').hide()

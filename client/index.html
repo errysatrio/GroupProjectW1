@@ -11,46 +11,48 @@
 </head>
 
 <body>
+    <div class = "header">
+        <div class = "navbar">
+            <ul>
+                <li id = "btn-sign-in">Sign in</li>
+                <li id = "btn-register">Register</li>
+            </ul>
+        </div>
+        <div class="logout" style="display: none;">
+            <ul>
+                <li id="btn-your-stocks">Your Stock</li>
+                <li id="btn-logout">Logout</li>
+            </ul>
+        </div>
+    </div>
     <div id="login-page">
-        <div id="login-form">
-            <form>
-                <div>
-                    <label for="username">Username or Email</label>
-                    <input type="text" name="username" id="username-login">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password-login">
-                </div>
-                <div>
-                    <button type="submit" onclick="login()">Sign In</button>
+        <div >
+            <h3 style="font-size: 30px;">Sign in</h3>
+            <form id="login-form">
+                <input type="text" name="username" id="username-login" placeholder="Username or Email">
+                <input type="password" name="password" id="password-login" placeholder="Password">
+                <div style="display: flex; justify-content: center;">
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </div>
+                <button type="submit" onclick="login()">Sign In</button>
             </form>
         </div>
     </div>
-    <div id="stocks">
-        <h2>List of Stocks</h2>
-    </div>
-    
-    <div id="register-page">
+    <div id="register-page" style="display: none;">
+        <h3 style="font-size: 30px;">Register</h3>
         <div>
             <form id="register-form">
                 <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name-register">
+                    <input type="text" name="name" id="name-register" placeholder="Name">
+                </div>
+                <div>          
+                    <input type="text" name="username" id="username-register" placeholder="Username">
                 </div>
                 <div>
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username-register">
+                    <input type="text" name="email" id="email-register" placeholder="Email">
                 </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email-register">
-                </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password-register">
+                <div>         
+                    <input type="password" name="password" id="password-register" placeholder="Password">
                 </div>
                 <div>
                     <button type="submit">Register</button>
@@ -58,15 +60,14 @@
             </form>
         </div>
     </div>
-
-    <div id="buy-page">
-        <div id="buy-form">
-
-
-        </div>
+    <div id="userStocks" style="display: none;">
+        <h2 style="font-size: 30px;">Your Stocks</h2>
+    </div>
+    <div id="stocks" style="display: none;">
+        <h2 style="font-size: 30px;">List of Stocks</h2>
     </div>
     
-    <div id="edit-page">
+    <div id="edit-page" style="display: none;">
         <div id="edit-form">
             <form>
                 <div>
@@ -105,6 +106,16 @@
     <script src= "script/google.js"></script>
     <script src= "script/onCondition.js"></script>
     <script src="script/functionScript.js"></script>
+    <script>
+        if(localStorage.token){
+            $("#login-page").hide(200)
+            $("#register-page").hide(200)
+            getStocks()
+            $("#stocks").show(450)
+            $(".navbar").hide()
+            $(".logout").show()
+        }
+    </script>
     
 </body>
 
